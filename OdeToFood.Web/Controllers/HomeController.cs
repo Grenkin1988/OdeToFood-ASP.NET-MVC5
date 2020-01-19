@@ -1,4 +1,5 @@
-﻿using System;
+﻿using OdeToFood.Data.Services;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -6,9 +7,15 @@ using System.Web.Mvc;
 
 namespace OdeToFood.Web.Controllers {
     public class HomeController : Controller {
-        public string Index() {
-            return "Hello World";
-            //return View();
+        private IRestaurantData _db;
+
+        public HomeController() {
+            _db = new InMemoryRestaurantData();
+        }
+
+        public ActionResult Index() {
+            IEnumerable<Data.Models.Restaurant> model = _db.GetAll();
+            return View(model);
         }
 
         public ActionResult About() {
