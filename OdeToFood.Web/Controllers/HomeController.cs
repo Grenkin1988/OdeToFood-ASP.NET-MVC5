@@ -1,16 +1,13 @@
 ﻿using OdeToFood.Data.Services;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 
 namespace OdeToFood.Web.Controllers {
     public class HomeController : Controller {
-        private IRestaurantData _db;
+        private readonly IRestaurantData _db;
 
-        public HomeController() {
-            _db = new InMemoryRestaurantData();
+        public HomeController(IRestaurantData db) {
+            _db = db;
         }
 
         public ActionResult Index() {
