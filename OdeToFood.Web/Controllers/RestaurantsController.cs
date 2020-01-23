@@ -32,10 +32,6 @@ namespace OdeToFood.Web.Controllers {
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create(Restaurant restaurant) {
-            if (string.IsNullOrWhiteSpace(restaurant.Name)) {
-                ModelState.AddModelError(nameof(restaurant.Name), "The name is required");
-            }
-
             if (ModelState.IsValid) {
                 _db.Add(restaurant);
                 return View("Index");
