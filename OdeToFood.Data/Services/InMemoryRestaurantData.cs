@@ -22,5 +22,10 @@ namespace OdeToFood.Data.Services {
         public IEnumerable<Restaurant> GetAll() {
             return _restaurants.OrderBy(r => r.Name);
         }
+
+        public void Add(Restaurant restaurant) {
+            restaurant.Id = _restaurants.Max(r => r.Id) + 1;
+            _restaurants.Add(restaurant);
+        }
     }
 }
