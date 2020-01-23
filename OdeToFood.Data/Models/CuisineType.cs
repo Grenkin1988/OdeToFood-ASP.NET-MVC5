@@ -3,6 +3,7 @@
         None,
         Italian,
         Indian,
-        French
+        French,
+        Vegan
     }
 }
