@@ -9,9 +9,9 @@ using OdeToFood.Data.Models;
 namespace OdeToFood.Data.Services
 {
     public class SqlRestaurantData : IRestaurantData {
-        private readonly OneToFoodDbContext _db;
+        private readonly OdeToFoodDbContext _db;
 
-        public SqlRestaurantData(OneToFoodDbContext db) {
+        public SqlRestaurantData(OdeToFoodDbContext db) {
             _db = db;
         }
 
@@ -25,12 +25,20 @@ namespace OdeToFood.Data.Services
         }
 
         public IEnumerable<Restaurant> GetAll() {
-            return _db.Restaurants.OrderBy(r => r.Name);
+            return from r in _db.Restaurants
+                   orderby r.Name
+                   select r;
         }
 
         public void Update(Restaurant restaurant) {
             var entry = _db.Entry(restaurant);
             entry.State = EntityState.Modified;
+            _db.SaveChanges();
+        }
+
+        public void Delete(int id) {
+            Restaurant restaurant = _db.Restaurants.Find(id);
+            _db.Restaurants.Remove(restaurant);
             _db.SaveChanges();
         }
     }

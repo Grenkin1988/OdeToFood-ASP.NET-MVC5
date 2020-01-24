@@ -35,5 +35,12 @@ namespace OdeToFood.Data.Services {
                 existing.Cuisine = restaurant.Cuisine;
             }
         }
+
+        public void Delete(int id) {
+            Restaurant existing = Get(id);
+            if (existing != null) {
+                _restaurants.Remove(existing);
+            }
+        }
     }
 }
