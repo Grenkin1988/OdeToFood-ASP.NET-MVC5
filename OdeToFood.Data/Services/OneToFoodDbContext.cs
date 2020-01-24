@@ -1,12 +1,8 @@
 ﻿using OdeToFood.Data.Models;
-using System;
-using System.Collections.Generic;
+using System.Data.Entity;
 
 namespace OdeToFood.Data.Services {
-    public class OneToFoodDbContext {
-        public List<Restaurant> Restaurants { get; internal set; }
-
-        internal void SaveChanges() {
-        }
+    public class OneToFoodDbContext : DbContext {
+        public DbSet<Restaurant> Restaurants { get; internal set; }
     }
 }
